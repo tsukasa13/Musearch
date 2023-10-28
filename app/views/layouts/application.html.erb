@@ -11,6 +11,61 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-left">
+          <span>Musearch</span>
+        </nav>
+        <nav class="nav navbar-right">
+          <ul class="navbar ml-auto list-unstyled">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path %>
+              </li>
+              <li>
+                曲一覧
+              </li>
+              <li>
+                投稿一覧
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li>
+                曲一覧
+              </li>
+              <li>
+                ユーザー一覧
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-9">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
