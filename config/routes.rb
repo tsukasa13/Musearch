@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     resources :songs, only: [:index, :show]
     get 'users/mypage' => 'users#show'
+    get 'users/information/edit' => 'users#edit'
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    root 'homes#top'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
