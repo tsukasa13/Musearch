@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :songs, only: [:index, :show]
     get 'users/mypage' => 'users#show'
     get 'users/information/edit' => 'users#edit'
+    patch 'users/information' => 'users#update'
+    get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
