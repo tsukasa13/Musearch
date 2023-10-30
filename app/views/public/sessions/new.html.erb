@@ -19,3 +19,8 @@
 
 <h4>会員登録がお済みでない方</h4>
 <%= render "public/shared/links" %>から新規登録を行なってください。
+
+<h4>ゲストログインはこちらから</h4>
+<div>
+  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+</div>
