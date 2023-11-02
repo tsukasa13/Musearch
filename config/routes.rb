@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     patch 'users/information' => 'users#update'
     get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'
     patch 'users/withdraw' => 'users#withdraw', as: 'withdraw'
+    resources :posts, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
