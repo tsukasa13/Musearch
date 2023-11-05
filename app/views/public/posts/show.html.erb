@@ -1,6 +1,13 @@
-<p>ユーザー名/<%= @user.name %></p>
+<div>
+  <p>ユーザー名/<%= @post.song.user.name %></p>
+  <p>どんな時に聴きたいか <%= @post.listen %></p>
+  <p>レビュー <%= @post.text %></p>
+  <%= @post.created_at.strftime('%Y年%m月%d日') %>
+  <% if @post.song.user == current_user %>
+    <%= link_to '編集', edit_post_path(@post.id) %>
+　  <%= link_to '削除', post_path(@post.id), method: :delete %>
+　<% end %>
+</div>
 
-<p>どんな時に聴きたいか <%= @post.listen %></p>
-
-<p>レビュー <%= @post.text %></p>
+<h1>いいね・コメント</h1>
 

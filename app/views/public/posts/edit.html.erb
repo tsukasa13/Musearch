@@ -1,0 +1,17 @@
+<h1>投稿編集</h1>
+
+<div class="container">
+  <h3>レビュー記入欄</h3>
+  <div class="row">
+    <div class="center-block">
+      <%= form_with model: @post, url: post_path(@post.id) do |f| %>
+        <div>
+          <p>どんな時に聴きたいか <%= post.text_field :listen %></p>
+          <p>レビュー <%= post.text_area :text %></p>
+        </div>
+        <%= f.submit "保存" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
