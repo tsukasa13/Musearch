@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
+    resources :songs, only:[:index, :show]
+    resources :users, only:[:index, :show, :edit, :update]
+    resources :posts, only:[:show, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
