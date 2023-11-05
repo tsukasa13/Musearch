@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2023_10_26_175400) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "song_id", null: false
-    t.integer "user_id", null: false
     t.string "listen", null: false
     t.text "text", null: false
     t.datetime "created_at", precision: 6, null: false
