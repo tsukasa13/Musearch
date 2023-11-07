@@ -1,3 +1,4 @@
+<h2>検索結果 "<%= @keyword %>"</h2>
 <div class="container">
   <h3>曲一覧</h3>
   <div class= "center-block">
@@ -14,7 +15,7 @@
           <tbody>
             <tr>
               <td><%= song.id %></td>
-              <td><%= link_to song.song_name, admin_song_path(song.id) %></td>
+              <td><%= link_to song.song_name, song_path(song.id) %></td>
               <td><%= song.artist_name %></td>
             </tr>
           </tbody>

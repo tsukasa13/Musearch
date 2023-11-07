@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-    resources :songs, only: [:new, :create, :index, :show]
+    resources :songs, only: [:new, :create, :index, :show] do
+      collection do
+        get 'search'
+      end
+    end
     get 'users/mypage' => 'users#show'
     get 'users/information/edit' => 'users#edit'
     patch 'users/information' => 'users#update'

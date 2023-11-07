@@ -25,6 +25,15 @@ class Public::SongsController < ApplicationController
     @posts = Post.page(params[:page])
   end
 
+  def search
+    if params[:keyword].present?
+      @songs = Song.where('song_name LIKE ? or artist_name LIKE ? or genre LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @songs = Song.all
+    end
+  end
+
   private
 
   def song_params
