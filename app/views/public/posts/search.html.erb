@@ -1,0 +1,26 @@
+<h2>検索結果 "<%= @keyword %>"</h2>
+<div class="container">
+  <h3>レビュー一覧</h3>
+  <div class= "center-block">
+    <div class="col-xs-1">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>どんな時に聴きたいか</th>
+            <th>レビュー</th>
+          </tr>
+        </thead>
+        <% @posts.each do |post| %>
+          <tbody>
+            <tr>
+              <td><%= link_to post.song.user.name, post_path(post.id) %></td>
+              <td><%= post.listen %></td>
+              <td><%= post.text %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

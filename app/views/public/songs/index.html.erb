@@ -1,8 +1,15 @@
-<p>検索</p>
-<%= form_with url: search_songs_path, local: true, method: :get do |form| %>
-  <%= form.text_field :keyword %>
-  <%= form.submit "検索" %>
-<% end %>
+<div>
+  <p>曲検索</p>
+  <%= form_with url: search_songs_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
+  <p>レビュー検索</p>
+  <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
+</div>
 
 <div class="container">
   <h3>曲一覧</h3>
