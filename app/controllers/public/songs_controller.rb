@@ -27,7 +27,7 @@ class Public::SongsController < ApplicationController
 
   def search
     if params[:keyword].present?
-      @songs = Song.where('song_name LIKE ? or artist_name LIKE ? or genre LIKE ?', "%#{params[:keyword]}%")
+      @songs = Song.where('song_name LIKE ? or artist_name LIKE ? or genre LIKE ?', "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
       @songs = Song.all
