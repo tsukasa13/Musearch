@@ -1,0 +1,36 @@
+<div class="container">
+  <h3>ユーザー一覧</h3>
+  <div class="center-block">
+    <div class="col-xs-1">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー名</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <% @users.each do |user| %>
+          <tbody>
+            <tr>
+              <td><%= user.id %></td>
+              <td>
+                <%= link_to admin_user_path(user.id) do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+              <td>
+                <% if user.is_deleted == false %>
+                  有効
+                <% else %>
+                  退会
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
