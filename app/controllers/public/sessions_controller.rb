@@ -6,9 +6,9 @@ class Public::SessionsController < Devise::SessionsController
     sign_in user
     redirect_to songs_path, notice: 'ゲストユーザーとしてログインしました。'
   end
-  
-  private
-  
+
+  protected
+
   def user_state
     @user = User.find_by(email: params[:user][:email])
     return if !@user
