@@ -4,5 +4,7 @@ class Admin::SongsController < ApplicationController
   end
 
   def show
+    @song = Song.find(params[:id])
+    @posts = Post.page(params[:page])
   end
 end
