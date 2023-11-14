@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+      resources :comments, only: [:create, :destroy]
     end
   end
 
@@ -30,9 +31,18 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
-    resources :songs, only:[:index, :show]
+    resources :songs, only:[:index, :show] do
+      collection do
+        get 'search'
+      end
+    end
     resources :users, only:[:index, :show, :edit, :update]
-    resources :posts, only:[:show, :destroy]
+    resources :posts, only:[:show, :destroy] do
+      collection do
+        get 'search'
+      end
+      resources :comments, only: [:create, :destroy]
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
