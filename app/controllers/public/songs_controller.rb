@@ -34,6 +34,15 @@ class Public::SongsController < ApplicationController
     end
   end
 
+  def genre
+    if params[:genre].present?
+      @songs = Song.all.where('genre LIKE(?)', "%#{"J-POP"}%").where('genre LIKE(?)', "%#{"ロック"}%").where('genre LIKE(?)', "%#{"K-POP"}%").where('genre LIKE(?)', "%#{"演歌"}%").where('genre LIKE(?)', "%#{"クラシック"}%").where('genre LIKE(?)', "%#{"洋楽"}%").where('genre LIKE(?)', "%#{"アニメ"}%")
+      @genre = params[:genre]
+    else
+      @songs = Song.all
+    end
+  end
+
   private
 
   def song_params

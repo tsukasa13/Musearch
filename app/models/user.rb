@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :songs, dependent: :destroy
   has_many :comments, dependent: :destroy
-
+  has_many :likes, dependent: :destroy
+  
   def active_for_authentication?
     super && (is_deleted == false)
   end

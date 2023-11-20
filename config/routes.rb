@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :songs, only: [:new, :create, :index, :show] do
       collection do
         get 'search'
+        get 'genre'
       end
     end
     get 'users/mypage' => 'users#show'
@@ -20,8 +21,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:show, :edit, :update, :destroy] do
       collection do
         get 'search'
+        get 'genre'
       end
       resources :comments, only: [:create, :destroy]
+      resource :like, only: [:create, :destroy]
     end
   end
 
@@ -34,6 +37,7 @@ Rails.application.routes.draw do
     resources :songs, only:[:index, :show] do
       collection do
         get 'search'
+        get 'genre'
       end
     end
     resources :users, only:[:index, :show, :edit, :update]
@@ -42,6 +46,7 @@ Rails.application.routes.draw do
         get 'search'
       end
       resources :comments, only: [:create, :destroy]
+      resource :like, only: [:create, :destroy]
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

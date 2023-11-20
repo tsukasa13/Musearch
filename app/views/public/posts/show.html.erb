@@ -11,6 +11,23 @@
 
 <%= link_to '曲詳細', song_path(@post.id) %>
 
+<p>いいね</p>
+<div>
+  <% if @post.liked_by?(current_user) %>
+    <p>
+      <%= link_to post_like_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to post_like_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
 <div>
   <p>コメント件数:<%= @post.comments.count %></p>
   <% @post.comments.each do |comment| %>

@@ -5,7 +5,7 @@
   <p>どんな時に聴きたいか <%= @post.listen %></p>
   <p>レビュー <%= @post.text %></p>
   <%= @post.created_at.strftime('%Y年%m月%d日') %>
-　<%= link_to '削除', post_path(@post.id), method: :delete %>
+　<%= link_to '削除', admin_post_path(@post.id), method: :delete %>
 </div>
 
 <%= link_to '曲詳細', admin_song_path(@post.id) %>
