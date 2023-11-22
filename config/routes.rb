@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
     end
     get 'users/mypage' => 'users#show'
+    get 'users/:id/likes' => 'users#like', as: 'like'
     get 'users/information/edit' => 'users#edit'
     patch 'users/information' => 'users#update'
     get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'

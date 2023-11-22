@@ -1,5 +1,6 @@
 class Public::SongsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: [:likes]
 
   def new
     @song = Song.new
@@ -48,4 +49,5 @@ class Public::SongsController < ApplicationController
   def song_params
     params.require(:song).permit(:user_id, :song_name, :artist_name, :genre, posts_attributes:[:id, :song_id, :listen, :text])
   end
+
 end
