@@ -2,6 +2,8 @@ class Public::UsersController < ApplicationController
   def show
     @user = current_user
     @likes = Post.likes(current_user, params[:page], 12)
+    @songs = current_user.songs.includes(:posts)
+    @posts = @songs.map(&:posts).flatten
   end
 
   def edit
