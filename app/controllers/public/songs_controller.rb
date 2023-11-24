@@ -8,12 +8,26 @@ class Public::SongsController < ApplicationController
   end
 
   def create
-    @song = Song.new(song_params)
-    @song.user_id = current_user.id
-    if @song.save
-      redirect_to song_path(@song.id)
+    @song = Song.find_by(song_name: params[:song][:song_name])
+    if @song != nil
+      if @song.in_song?
+        redirect_to song_path(@song) # リダイレクト先を指定する
+      else
+        @post = Post.new(song_params[:posts_attributes][:"0"])
+        @post.song_id = @song.id
+        if @post.save
+          redirect_to song_path(@post.song.id) # 保存が成功した場合のリダイレクト先を指定する
+        else
+          render "new" # 保存が失敗した場合はnewアクションのビューを表示する
+        end
+      end
     else
-      render :new
+      @song = Song.new(song_params)
+      if @song.save
+        redirect_to song_path(@song) # 保存が成功した場合のリダイレクト先を指定する
+      else
+        render "new" # 保存が失敗した場合はnewアクションのビューを表示する
+      end
     end
   end
 
