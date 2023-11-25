@@ -9,7 +9,7 @@
 　<% end %>
 </div>
 
-<%= link_to '曲詳細', song_path(@post.id) %>
+<%= link_to '曲詳細', song_path(@post.song.id) %>
 
 <div>
   <% if @post.liked_by?(current_user) %>
