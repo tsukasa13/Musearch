@@ -1,0 +1,26 @@
+<h2>検索結果 "<%= @genre %>"</h2>
+<div class="container">
+  <h3>曲一覧</h3>
+  <div class= "center-block">
+    <div class="col-xs-1">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>曲ID</th>
+            <th>曲名</th>
+            <th>アーティスト名</th>
+          </tr>
+        </thead>
+        <% @songs.each do |song| %>
+          <tbody>
+            <tr>
+              <td><%= song.id %></td>
+              <td><%= link_to song.song_name, admin_song_path(song.id) %></td>
+              <td><%= song.artist_name %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

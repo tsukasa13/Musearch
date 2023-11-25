@@ -10,4 +10,19 @@ class Admin::PostsController < ApplicationController
     post.destroy
     redirect_to admin_songs_path
   end
+
+  def search
+    if params[:keyword].present?
+      @posts = Post.where('listen LIKE ? or text LIKE ?', "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @posts = Post.all
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:song_id, :listen, :text)
+  end
 end

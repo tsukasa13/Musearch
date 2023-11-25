@@ -57,11 +57,10 @@ class Public::SongsController < ApplicationController
       @songs = Song.all
     end
   end
-
+  
   private
-
+  
   def song_params
     params.require(:song).permit(:user_id, :song_name, :artist_name, :genre, posts_attributes:[:id, :song_id, :listen, :text])
   end
-
 end
