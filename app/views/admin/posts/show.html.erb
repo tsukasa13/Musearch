@@ -8,4 +8,4 @@
 　<%= link_to '削除', admin_post_path(@post.id), method: :delete %>
 </div>
 
-<%= link_to '曲詳細', admin_song_path(@post.id) %>
+<%= link_to '曲詳細', admin_song_path(@post.song.id) %>

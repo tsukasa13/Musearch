@@ -6,13 +6,13 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     resources :songs, only: [:new, :create, :index, :show] do
       collection do
         get 'search'
         get 'genre'
       end
     end
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     get 'users/mypage' => 'users#show'
     get 'users/:id/likes' => 'users#like', as: 'like'
     get 'users/information/edit' => 'users#edit'

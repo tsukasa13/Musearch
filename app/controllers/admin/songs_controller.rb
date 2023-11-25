@@ -5,6 +5,6 @@ class Admin::SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    @posts = Post.page(params[:page])
+    @posts = Post.where(song_id: @song.id).page(params[:page])
   end
 end
