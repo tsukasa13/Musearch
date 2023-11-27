@@ -38,6 +38,7 @@
             <th>曲ID</th>
             <th>曲名</th>
             <th>アーティスト名</th>
+            <th>ジャンル</th>
           </tr>
         </thead>
         <% @songs.each do |song| %>
@@ -46,6 +47,7 @@
               <td><%= song.id %></td>
               <td><%= link_to song.song_name, song_path(song.id) %></td>
               <td><%= song.artist_name %></td>
+              <td><%= song.genre %></td>
             </tr>
           </tbody>
         <% end %>

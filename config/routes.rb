@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-
+  devise_scope :user do
+    post 'users/guest_sign_in' => 'public/sessions#guest_sign_in'
+  end
   scope module: :public do
     root 'homes#top'
     resources :songs, only: [:new, :create, :index, :show] do
@@ -12,7 +14,6 @@ Rails.application.routes.draw do
         get 'genre'
       end
     end
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     get 'users/mypage' => 'users#show'
     get 'users/:id/likes' => 'users#like', as: 'like'
     get 'users/information/edit' => 'users#edit'

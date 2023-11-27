@@ -9,27 +9,29 @@ class Public::SongsController < ApplicationController
 
   def create
     @song = Song.find_by(song_name: params[:song][:song_name])
-    if @song != nil
-      if @song.in_song?
-        redirect_to song_path(@song) # リダイレクト先を指定する
-      else
-        @post = Post.new(song_params[:posts_attributes][:"0"])
-        @post.song_id = @song.id
-        if @post.save
-          redirect_to song_path(@post.song.id) # 保存が成功した場合のリダイレクト先を指定する
-        else
-          render "new" # 保存が失敗した場合はnewアクションのビューを表示する
-        end
-      end
-    else
+    if @song.nil?
       @song = Song.new(song_params)
+      @song.user_id = current_user.id
       if @song.save
         redirect_to song_path(@song) # 保存が成功した場合のリダイレクト先を指定する
       else
+        flash[:error] = @song.errors.full_messages.join("<br>").html_safe
+        render "new" # 保存が失敗した場合はnewアクションのビューを表示する
+      end
+    elsif @song.in_song?
+      redirect_to song_path(@song) # リダイレクト先を指定する
+    else
+      @post = Post.new(song_params[:posts_attributes][:"0"])
+      @post.song_id = @song.id
+      if @post.save
+        redirect_to song_path(@post.song.id) # 保存が成功した場合のリダイレクト先を指定する
+      else
+        flash[:error] = @post.errors.full_messages.join("<br>").html_safe
         render "new" # 保存が失敗した場合はnewアクションのビューを表示する
       end
     end
   end
+
 
   def index
     @songs = Song.page(params[:page])
@@ -51,16 +53,18 @@ class Public::SongsController < ApplicationController
 
   def genre
     if params[:genre].present?
-      @songs = Song.all.where('genre LIKE(?)', "%#{"J-POP"}%").where('genre LIKE(?)', "%#{"ロック"}%").where('genre LIKE(?)', "%#{"K-POP"}%").where('genre LIKE(?)', "%#{"演歌"}%").where('genre LIKE(?)', "%#{"クラシック"}%").where('genre LIKE(?)', "%#{"洋楽"}%").where('genre LIKE(?)', "%#{"アニメ"}%")
+      genres = params[:genre].split(",") # パラメータのジャンルを配列に分割する
+      @songs = Song.where(genre: genres) # ジャンルが配列に含まれる曲を取得する
       @genre = params[:genre]
     else
       @songs = Song.all
+      @genre = nil # ジャンルが指定されていない場合は、@genre変数にはnilを設定しておく
     end
   end
-  
+
   private
-  
+
   def song_params
-    params.require(:song).permit(:user_id, :song_name, :artist_name, :genre, posts_attributes:[:id, :song_id, :listen, :text])
+    params.require(:song).permit(:song_name, :artist_name, :genre, posts_attributes:[:id, :song_id, :listen, :text])
   end
 end
