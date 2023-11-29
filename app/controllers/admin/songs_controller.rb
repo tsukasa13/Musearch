@@ -19,10 +19,12 @@ class Admin::SongsController < ApplicationController
 
   def genre
     if params[:genre].present?
-      @songs = Song.all.where('genre LIKE(?)', "%#{"J-POP"}%").where('genre LIKE(?)', "%#{"ロック"}%").where('genre LIKE(?)', "%#{"K-POP"}%").where('genre LIKE(?)', "%#{"演歌"}%").where('genre LIKE(?)', "%#{"クラシック"}%").where('genre LIKE(?)', "%#{"洋楽"}%").where('genre LIKE(?)', "%#{"アニメ"}%")
+      genres = params[:genre].split(",") # パラメータのジャンルを配列に分割する
+      @songs = Song.where(genre: genres) # ジャンルが配列に含まれる曲を取得する
       @genre = params[:genre]
     else
       @songs = Song.all
+      @genre = nil # ジャンルが指定されていない場合は、@genre変数にはnilを設定しておく
     end
   end
 

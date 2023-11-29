@@ -16,13 +16,13 @@
   <%= form_with url: genre_admin_songs_path, local: true, method: :get do |f| %>
     <div class="accshow">
       ジャンルを選択<br>
-      <input type="checkbox" genre="J-POP" value="J-POP">J-POP<br>
-      <input type="checkbox" genre="ロック" value="ロック">ロック<br>
-      <input type="checkbox" genre="K-POP" value="K-POP">K-POP<br>
-      <input type="checkbox" genre="演歌" value="演歌">演歌<br>
-      <input type="checkbox" genre="クラシック" value="クラシック">クラシック<br>
-      <input type="checkbox" genre="洋楽" value="female">洋楽<br>
-      <input type="checkbox" genre="アニメ" value="male">アニメ<br>
+      <input type="checkbox" name="genre[]" value="J-POP">J-POP<br>
+      <input type="checkbox" name="genre[]" value="ロック">ロック<br>
+      <input type="checkbox" name="genre[]" value="K-POP">K-POP<br>
+      <input type="checkbox" name="genre[]" value="演歌">演歌<br>
+      <input type="checkbox" name="genre[]" value="クラシック">クラシック<br>
+      <input type="checkbox" name="genre[]" value="洋楽">洋楽<br>
+      <input type="checkbox" name="genre[]" value="アニメ">アニメ<br>
       <input type="submit" value="絞り込む">
     </div>
   <% end %>
