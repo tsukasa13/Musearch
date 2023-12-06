@@ -1,4 +1,14 @@
-<p>
-  ようこそ、Musearchへ！<br>
-  おすすめの曲を共有したり、こういう時に聴きたいと思った曲を探すサイトになります。
-</p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <p>
+        ようこそ、Musearchへ！<br>
+        おすすめの曲を共有したり、こういう時に聴きたいと思った曲を探すサイトになります。
+      </p>
+    </div>
+    <div class="btn-warpper col-10 mx-auto">
+      <%= link_to "ログイン", new_user_session_path, class: "border-dark btn  btn-sm btn-block mb-3" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "border-dark btn  btn-sm btn-block mb-3" %>
+    </div>
+  </div>
+</div>
