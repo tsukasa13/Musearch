@@ -1,56 +1,66 @@
-<div>
-  <p>曲検索</p>
-  <%= form_with url: search_admin_songs_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-  <p>レビュー検索</p>
-  <%= form_with url: search_admin_posts_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
-
-<div class="accbox">
-  <p>ジャンルで絞り込む</p>
-  <%= form_with url: genre_admin_songs_path, local: true, method: :get do |f| %>
-    <div class="accshow">
-      ジャンルを選択<br>
-      <input type="checkbox" name="genre[]" value="J-POP">J-POP<br>
-      <input type="checkbox" name="genre[]" value="ロック">ロック<br>
-      <input type="checkbox" name="genre[]" value="K-POP">K-POP<br>
-      <input type="checkbox" name="genre[]" value="演歌">演歌<br>
-      <input type="checkbox" name="genre[]" value="クラシック">クラシック<br>
-      <input type="checkbox" name="genre[]" value="洋楽">洋楽<br>
-      <input type="checkbox" name="genre[]" value="アニメ">アニメ<br>
-      <input type="submit" value="絞り込む">
-    </div>
-  <% end %>
-</div>
-
 <div class="container">
-  <h3>曲一覧</h3>
-  <div class= "center-block">
-    <div class="col-xs-1">
-      <table class="table table-hover table-inverse">
-        <thead>
-          <tr>
-            <th>曲ID</th>
-            <th>曲名</th>
-            <th>アーティスト名</th>
-          </tr>
-        </thead>
-        <% @songs.each do |song| %>
-          <tbody>
-            <tr>
-              <td><%= song.id %></td>
-              <td><%= link_to song.song_name, admin_song_path(song.id) %></td>
-              <td><%= song.artist_name %></td>
-            </tr>
-          </tbody>
+  <div class="row">
+    <div class="col-lg-4">
+      <div>
+        <span>曲検索</span>
+        <%= form_with url: search_admin_songs_path, local: true, method: :get do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "検索" %>
         <% end %>
-      </table>
-      <%= paginate @songs %>
+      </div>
+
+      <div>
+        <span>レビュー検索</span>
+        <%= form_with url: search_admin_posts_path, local: true, method: :get do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+
+      <div class="accbox">
+        <span>ジャンルで絞り込む</span>
+        <%= form_with url: genre_admin_songs_path, local: true, method: :get do |f| %>
+          <div class="accshow">
+            ジャンルを選択<br>
+            <input type="checkbox" name="genre[]" value="J-POP">J-POP<br>
+            <input type="checkbox" name="genre[]" value="ロック">ロック<br>
+            <input type="checkbox" name="genre[]" value="K-POP">K-POP<br>
+            <input type="checkbox" name="genre[]" value="演歌">演歌<br>
+            <input type="checkbox" name="genre[]" value="クラシック">クラシック<br>
+            <input type="checkbox" name="genre[]" value="洋楽">洋楽<br>
+            <input type="checkbox" name="genre[]" value="アニメ">アニメ<br>
+            <input type="submit" value="絞り込む">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <h3>曲一覧</h3>
+      <div class= "center-block">
+        <div class="col-xs-1">
+          <table class="table table-hover table-inverse">
+            <thead>
+              <tr>
+                <th>曲ID</th>
+                <th>曲名</th>
+                <th>アーティスト名</th>
+              </tr>
+            </thead>
+            <% @songs.each do |song| %>
+              <tbody>
+                <tr>
+                  <td><%= song.id %></td>
+                  <td><%= link_to song.song_name, admin_song_path(song.id) %></td>
+                  <td><%= song.artist_name %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+          <%= paginate @songs %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
