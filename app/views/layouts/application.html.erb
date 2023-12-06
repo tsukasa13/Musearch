@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>Musearch</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <script src="https://kit.fontawesome.com/c9084df719.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,42 +12,60 @@
   </head>
 
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header class="navbar navbar-fixed-top navbar-inverse shadow-sm">
       <div class="container">
         <nav class="nav navbar-left">
-          <span>Musearch</span>
+          <span class="nav-link text-dark"><i class="fa-solid fa-headphones"></i>Musearch</span>
         </nav>
         <nav class="nav navbar-right">
           <ul class="navbar ml-auto list-unstyled">
             <% if user_signed_in? %>
               <li>
-                <%= link_to "新規投稿", new_song_path %>
+                <%= link_to new_song_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-pen-to-square"></i>新規投稿</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "曲一覧", songs_path %>
+                <%= link_to songs_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-music"></i>曲一覧</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "プロフィール", users_mypage_path %>
+                <%= link_to users_mypage_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-circle-user"></i>プロフィール</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-sign-out-alt"></i>ログアウト</span>
+                <% end %>
               </li>
             <% elsif admin_signed_in? %>
               <li>
-                <%= link_to "曲一覧", admin_songs_path %>
+                <%= link_to admin_songs_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-music"></i>曲一覧</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "ユーザー一覧", admin_users_path %>
+                <%= link_to admin_users_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-users"></i>ユーザー一覧</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                <%= link_to destroy_admin_session_path, method: :delete do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-sign-out-alt"></i>ログアウト</span>
+                <% end %>
               </li>
             <% else %>
               <li>
-                <%= link_to "新規登録", new_user_registration_path %>
+                <%= link_to new_user_registration_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-user-plus"></i>新規登録</span>
+                <% end %>
               </li>
               <li>
-                <%= link_to "ログイン", new_user_session_path %>
+                <%= link_to new_user_session_path do %>
+                  <span class="nav-link text-dark"><i class="fa-solid fa-sign-in-alt"></i>ログイン</span>
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -55,11 +73,11 @@
       </div>
     </header>
 
-    <main>
+    <main class="mb-auto">
       <%= yield %>
     </main>
 
-    <footer>
+    <footer class="bg-dark pt-5 pb-4">
       <div class="container">
         <div class="row">
           <div class="col-xs-3 col-xs-offset-9">
