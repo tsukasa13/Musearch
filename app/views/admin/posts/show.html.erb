@@ -1,12 +1,14 @@
 <div class="container">
-  <h2>レビュー詳細</h2>
-  <div>
-    <p>ユーザー名/<%= @post.song.user.name %></p>
-    <p>どんな時に聴きたいか <%= @post.listen %></p>
-    <p>レビュー <%= @post.text %></p>
-    <%= @post.created_at.strftime('%Y年%m月%d日') %>
-    <%= link_to '削除', admin_post_path(@post.id), method: :delete %>
-  </div>
+  <div class="m-3">
+    <h3>レビュー詳細</h3>
+    <div>
+      <p>ユーザー名/<%= @post.song.user.name %></p>
+      <p>どんな時に聴きたいか <%= @post.listen %></p>
+      <p>レビュー <%= @post.text %></p>
+      <%= @post.created_at.strftime('%Y年%m月%d日') %>
+      <%= link_to '削除', admin_post_path(@post.id), method: :delete %>
+    </div>
 
-  <%= link_to '曲詳細に戻る', admin_song_path(@post.song.id) %>
+    <%= link_to '曲詳細に戻る', admin_song_path(@post.song.id) %>
+  </div>
 </div>
