@@ -1,9 +1,13 @@
-<h1>プロフィール</h1>
+<div class="text-center m-2">
+  <div class="border border-dark m-3">
+    <h1>プロフィール</h1>
 
-<div>
-  <h3>名前 <%= @user.name %></h3>
-  <h3>メールアドレス <%= @user.email %></h3>
-  <%= link_to "編集", users_information_edit_path %>
+    <div>
+      <h3>名前 <%= @user.name %></h3>
+      <h3>メールアドレス <%= @user.email %></h3>
+      <%= link_to "編集", users_information_edit_path %>
+    </div>
+  </div>
 </div>
 
 <div class="container">

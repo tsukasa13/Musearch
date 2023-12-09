@@ -1,17 +1,23 @@
-<h1>プロフィール編集</h1>
-<%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
-  <div>
-    <%= f.label '名前' %>
-    <%= f.text_field :name %>
-  </div>
+<div class="container">
+  <div class="m-2">
+    <h3>プロフィール編集</h3>
+    <%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
+      <div class="m-4">
+        <div>
+          <%= f.label '名前' %>
+          <%= f.text_field :name %>
+        </div>
 
-  <div>
-    <%= f.label 'メールアドレス' %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div>
+          <%= f.label 'メールアドレス' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
 
-  <div>
-    <%= f.submit '保存' %>
-    <%= link_to '退会する', confirm_withdraw_path %>
+        <div class="m-2">
+          <%= f.submit '保存' %>
+          <%= link_to '退会する', confirm_withdraw_path %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
