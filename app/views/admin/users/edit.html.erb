@@ -1,25 +1,30 @@
 <div class="container">
-  <h3><%= @user.name %>さんの会員情報編集</h3>
-  <div clss="row">
-    <div class="col-xs-12">
-      <%= form_with model: @user, url: admin_user_path(@user.id) do |f| %>
+  <div class="m-3">
+    <h3><%= @user.name %>さんの会員情報編集</h3>
+    <div clss="row">
+      <div class="col-xs-12">
+        <%= form_with model: @user, url: admin_user_path(@user.id) do |f| %>
 
-        <div>
-          <p>会員ID <%= @user.id %></p>
-          <p>ユーザー名 <%= f.text_field :name %></p>
-          <p>メールアドレス <%= f.text_field :email %></p>
-          <p>
-            会員ステータス
-            <%= f.radio_button :is_deleted, "false" %>
-            <%= f.label :is_deleted, "有効" %>
-            <%= f.radio_button :is_deleted, "true" %>
-            <%= f.label :is_deleted, "退会" %>
-          </p>
+          <div>
+            <p>会員ID <%= @user.id %></p>
+            <p>ユーザー名 <%= f.text_field :name %></p>
+            <p>メールアドレス <%= f.text_field :email %></p>
+            <p>
+              会員ステータス
+              <%= f.radio_button :is_deleted, "false" %>
+              <%= f.label :is_deleted, "有効" %>
+              <%= f.radio_button :is_deleted, "true" %>
+              <%= f.label :is_deleted, "退会" %>
+            </p>
+          </div>
+          <%= f.submit "保存", class: "btn btn-success" %>
+
+        <% end %>
+
+        <div class="m-3">
+          <%= link_to "ユーザー詳細に戻る", admin_user_path(@user.id) %>
         </div>
-        <%= f.submit "保存", class: "btn btn-success" %>
-
-      <% end %>
-      <%= link_to "ユーザー詳細に戻る", admin_user_path(@user.id) %>
+      </div>
     </div>
   </div>
 </div>
