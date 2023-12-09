@@ -1,28 +1,34 @@
 <div class="container">
-  <h2>ログイン</h2>
+  <div class="m-3">
+    <h3>ログイン</h3>
 
-  <h4>会員の方はこちらからログイン</h4>
-  <%= form_with model: @user, url: user_session_path do |f| %>
-    <div class="field">
-      <%= f.label 'メールアドレス' %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="m-4">
+      <h5>会員の方はこちらからログイン</h5>
+      <%= form_with model: @user, url: user_session_path do |f| %>
+        <div class="field">
+          <%= f.label 'メールアドレス' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
+          <%= f.label 'パスワード' %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "ログイン" %>
+        </div>
+      <% end %>
     </div>
 
-    <div class="field">
-      <%= f.label 'パスワード' %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+    <div class="m-4">
+      <h5>会員登録がお済みでない方</h5>
+    <%= render "public/shared/links" %>から新規登録を行なってください。
     </div>
 
-    <div class="actions">
-      <%= f.submit "ログイン" %>
+    <div class="m-4">
+      <h5>ゲストログインはこちらから</h5>
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
     </div>
-  <% end %>
-
-  <h4>会員登録がお済みでない方</h4>
-  <%= render "public/shared/links" %>から新規登録を行なってください。
-
-  <h4>ゲストログインはこちらから</h4>
-  <div>
-    <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
   </div>
 </div>
