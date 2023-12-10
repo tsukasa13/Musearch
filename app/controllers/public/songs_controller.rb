@@ -4,34 +4,48 @@ class Public::SongsController < ApplicationController
 
   def new
     @song = Song.new
-    @song.posts.new
-  end
-
-  def create
-    @song = Song.find_by(song_name: params[:song][:song_name])
-    if @song.nil?
-      @song = Song.new(song_params)
-      @song.user_id = current_user.id
-      if @song.save
-        redirect_to song_path(@song) # 保存が成功した場合のリダイレクト先を指定する
-      else
-        flash[:error] = @song.errors.full_messages.join("<br>").html_safe
-        render "new" # 保存が失敗した場合はnewアクションのビューを表示する
-      end
-    elsif @song.in_song?
-      redirect_to song_path(@song) # リダイレクト先を指定する
+    if params[:name].present?
+      @songs = Song.where('song_name like ?', "%#{params[:name]}%")
     else
-      @post = Post.new(song_params[:posts_attributes][:"0"])
-      @post.song_id = @song.id
-      if @post.save
-        redirect_to song_path(@post.song.id) # 保存が成功した場合のリダイレクト先を指定する
-      else
-        flash[:error] = @post.errors.full_messages.join("<br>").html_safe
-        render "new" # 保存が失敗した場合はnewアクションのビューを表示する
-      end
+      @songs = []
+    end
+  end
+  
+  def create
+    @song = current_user.songs.build(song_params)
+    if @song.save
+      flash[:notice] = "saved"
+      redirect_to song_path(@song)
+    else
+      flash.now[:alert] = 'failed'
+      render :new
     end
   end
 
+  # def create
+  #   @song = Song.find_by(song_name: params[:song][:song_name])
+  #   if @song.nil?
+  #     @song = Song.new(song_params)
+  #     @song.user_id = current_user.id
+  #     if @song.save
+  #       redirect_to song_path(@song) # 保存が成功した場合のリダイレクト先を指定する
+  #     else
+  #       flash[:error] = @song.errors.full_messages.join("<br>").html_safe
+  #       render "new" # 保存が失敗した場合はnewアクションのビューを表示する
+  #     end
+  #   elsif @song.in_song?
+  #     redirect_to song_path(@song) # リダイレクト先を指定する
+  #   else
+  #     @post = Post.new(song_params[:posts_attributes][:"0"])
+  #     @post.song_id = @song.id
+  #     if @post.save
+  #       redirect_to song_path(@post.song.id) # 保存が成功した場合のリダイレクト先を指定する
+  #     else
+  #       flash[:error] = @post.errors.full_messages.join("<br>").html_safe
+  #       render "new" # 保存が失敗した場合はnewアクションのビューを表示する
+  #     end
+  #   end
+  # end
 
   def index
     @songs = Song.page(params[:page])
@@ -65,6 +79,6 @@ class Public::SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:song_name, :artist_name, :genre, posts_attributes:[:id, :song_id, :listen, :text])
+    params.require(:song).permit(:song_name, :artist_name, :genre)#, posts_attributes:[:id, :song_id, :listen, :text])
   end
 end
