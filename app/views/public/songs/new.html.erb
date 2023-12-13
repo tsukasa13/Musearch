@@ -1,79 +1,64 @@
-<div class="container">
-  <div class="">
-    <h3>search songs</h3>
+<div class="container mt-3">
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="m-3">
+        <h3>曲検索</h3>
 
-    <%= form_with(url: new_song_path, method: :get, local: true) do |f| %>
-      search song name: <%= f.search_field :name, value: params[:name] %>
-      <%= f.submit 'search' %>
-    <% end %>
+        <%= form_with(url: new_song_path, method: :get, local: true) do |f| %>
+          <%= f.search_field :name, value: params[:name] %>
+          <%= f.submit '検索' %>
+        <% end %>
 
-    <% if @songs.any? %>
-      <h3>songs</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @songs.each do |song| %>
-            <tr>
-              <td><%= link_to song.song_name, song_path(song) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p>重複がないか検索してください</p>
-    <% end %>
-  </div>
-  <div class="m-3">
-    <h1 class="text-center">新規投稿</h1>
-    <%= form_with(model: @song, url: songs_path, local: true) do |f| %>
-      <% if @song.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
-          <ul>
-            <% @song.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
+        <% if @songs.any? %>
+          <h3>検索結果</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>曲名</th>
+                <th>アーティスト名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @songs.each do |song| %>
+                <tr>
+                  <td><%= link_to song.song_name, song_path(song) %></td>
+                  <td><%= song.artist_name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>重複がないか、こちらで確認してください</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="m-3">
+      <h1>曲新規投稿</h1>
+      <%= form_with(model: @song, url: songs_path, local: true) do |f| %>
+        <% if @song.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+            <ul>
+              <% @song.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div>
+          <%= f.label "曲名" %>
+          <%= f.text_field :song_name %><br>
+
+          <%= f.label "アーティスト名" %>
+          <%= f.text_field :artist_name %><br>
+
+          <%= f.label "ジャンル" %>
+          <%= f.text_field :genre %><br>
+
+          <%= f.submit '投稿' %>
         </div>
       <% end %>
-
-      <div class="d-flex justify-content-center">
-        <div class="col-xs-6">
-          <div class="m-3">
-            <h3>曲の情報記入欄</h3>
-
-            <%= f.label "曲名" %>
-            <%= f.text_field :song_name %><br>
-
-            <%= f.label "アーティスト名" %>
-            <%= f.text_field :artist_name %><br>
-
-            <%= f.label "ジャンル" %>
-            <%= f.text_field :genre %>
-          </div>
-        </div>
-
-        <div class="col-xs-6">
-          <div class="m-3">
-            <h3>レビュー記入欄</h3>
-            <%#= f.fields_for :posts do |post| %>
-              <%#= post.label "どんな時に聴きたいか" %>
-              <%#= post.text_field :listen %><br>
-
-              <%#= post.label "レビュー" %>
-              <%#= post.text_area :text %>
-            <%# end %>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <%= f.submit '投稿' %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>

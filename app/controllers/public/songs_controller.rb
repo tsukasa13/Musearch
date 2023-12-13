@@ -10,7 +10,7 @@ class Public::SongsController < ApplicationController
       @songs = []
     end
   end
-  
+
   def create
     @song = current_user.songs.build(song_params)
     if @song.save
@@ -18,6 +18,10 @@ class Public::SongsController < ApplicationController
       redirect_to song_path(@song)
     else
       flash.now[:alert] = 'failed'
+
+      # 検索結果の取得と代入
+      @songs = Song.all
+
       render :new
     end
   end
@@ -54,6 +58,7 @@ class Public::SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @posts = Post.where(song_id: @song.id).page(params[:page])
+    @post = Post.new
   end
 
   def search

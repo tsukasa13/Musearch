@@ -1,6 +1,19 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
 
+  def create
+    @song = Song.find(params[:id]) # 関連するSongオブジェクトを取得
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.song_id = @song.id# 関連を設定
+    if @post.save
+      redirect_to post_path(@post.song.id)
+    else
+      # 保存に失敗した場合の処理
+      render :new
+    end
+  end
+
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
