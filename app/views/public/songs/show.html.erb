@@ -2,15 +2,16 @@
   <div class="row">
     <div class="col-lg-4">
       <div class="border border-3 m-3">
-        <h3><%= @song.song_name %>の詳細</h3>
+        <h2><%= @song.song_name %>の詳細</h2>
         <p>曲名 <%= @song.song_name %></p>
         <p>アーティスト名 <%= @song.artist_name %></p>
         <p>ジャンル <%= @song.genre %></p>
       </div>
 
       <div class="border border-3 m-3">
-        <h3>レビュー新規投稿</h3>
-        <%= form_with(model: @post, url: posts_path(@post), local: true) do |f| %>
+        <p>この曲に対してのレビューはこちらから</p>
+        <h4>レビュー新規投稿</h4>
+        <%= form_with(model: @post, url: song_posts_path(@song), local: true) do |f| %>
           <% if @post.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@post.errors.count, "error") %> prohibited this song from being saved:</h2>
@@ -50,7 +51,7 @@
             <% @posts.each do |post| %>
               <tbody>
                 <tr>
-                  <td><%= link_to post.user.name, post_path(post.id) %></td>
+                  <td><%= link_to post.user.name, song_post_path(post.id) %></td>
                   <td><%= post.listen %></td>
                   <td><%= post.text %></td>
                 </tr>

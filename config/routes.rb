@@ -10,8 +10,16 @@ Rails.application.routes.draw do
     root 'homes#top'
     resources :songs, only: [:new, :create, :index, :show] do
       collection do
-        get 'search'
+        get 'search_with_songs' => "songs#search"
+        get 'search_with_posts' => "posts#search"
         get 'genre'
+      end
+      resources :posts, only: [:create, :show, :edit, :update, :destroy] do
+        # collection do
+        #   get 'search'
+        # end
+        resources :comments, only: [:create, :destroy]
+        resource :like, only: [:create, :destroy]
       end
     end
     get 'users/mypage' => 'users#show'
@@ -20,13 +28,13 @@ Rails.application.routes.draw do
     patch 'users/information' => 'users#update'
     get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'
     patch 'users/withdraw' => 'users#withdraw', as: 'withdraw'
-    resources :posts, only: [:create, :show, :edit, :update, :destroy] do
-      collection do
-        get 'search'
-      end
-      resources :comments, only: [:create, :destroy]
-      resource :like, only: [:create, :destroy]
-    end
+    # resources :posts, only: [:create, :show, :edit, :update, :destroy] do
+    #   collection do
+    #     get 'search'
+    #   end
+    #   resources :comments, only: [:create, :destroy]
+    #   resource :like, only: [:create, :destroy]
+    # end
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
