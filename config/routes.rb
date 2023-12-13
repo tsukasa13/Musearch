@@ -15,9 +15,6 @@ Rails.application.routes.draw do
         get 'genre'
       end
       resources :posts, only: [:create, :show, :edit, :update, :destroy] do
-        # collection do
-        #   get 'search'
-        # end
         resources :comments, only: [:create, :destroy]
         resource :like, only: [:create, :destroy]
       end
