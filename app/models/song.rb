@@ -9,7 +9,7 @@ class Song < ApplicationRecord
   def unique_combination
     if Song.exists?(song_name: song_name)
       if Song.exists?(song_name: song_name, artist_name: artist_name)
-        errors.add(:base, '同じ曲名とアーティスト名の組み合わせは既に存在します。')
+        errors.add(:base, '同じ曲名とアーティスト名の組み合わせは既に存在します。曲検索で確認してください。')
       end
     end
   end
