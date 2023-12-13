@@ -6,10 +6,10 @@
       <p>レビュー <%= @post.text %></p>
       <%= @post.created_at.strftime('%Y年%m月%d日') %>
       <% if @post.song.user == current_user %>
-        <%= link_to '編集', edit_song_post_path(@post.id) %>
+        <%= link_to '編集', edit_song_post_path(@post.song.id) %>
 　      <%= link_to '削除', song_post_path(@post.id), method: :delete %>
 　    <% end %>
-　    <%#= link_to '曲詳細に戻る', song_path(@post.song.id) %>
+　    <%= link_to '曲詳細に戻る', song_path(@post.song.id) %>
     </div>
 
     <div class="d-flex justify-content border-top m-4">
