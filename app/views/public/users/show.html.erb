@@ -37,7 +37,7 @@
 </div>
 
 <div class="container">
-  <h3>投稿一覧</h3>
+  <h3>レビュー投稿一覧</h3>
   <div class= "center-block">
     <div class="col-xs-1">
       <table class="table table-hover table-inverse">
@@ -51,7 +51,7 @@
         <% @posts.each do |post| %>
           <tbody>
             <tr>
-              <td><%= link_to post.song.user.name, song_post_path(post.song_id, post.id) %></td>
+              <td><%= link_to post.user.name, song_post_path(post.song_id, post.id) %></td>
               <td><%= post.listen %></td>
               <td><%= post.text %></td>
             </tr>

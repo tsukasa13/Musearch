@@ -33,11 +33,11 @@
         <p>コメント件数:<%= @post.comments.count %></p>
         <% @post.comments.each do |comment| %>
           <br><%= comment.user.name %>
-          <%= comment.created_at.strftime('%Y年%m月%d日') %><br>
-          <%= comment.comment %>
+          <%= comment.created_at.strftime('%Y年%m月%d日') %>
           <% if comment.user == current_user %>
             <%= link_to "削除", song_post_comment_path(@post.song, @post, comment), method: :delete %><br>
           <% end %>
+          <%= comment.comment %>
         <% end %>
       </div>
       <div class="m-2">
