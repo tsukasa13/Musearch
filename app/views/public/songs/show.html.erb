@@ -51,7 +51,11 @@
             <% @posts.each do |post| %>
               <tbody>
                 <tr>
-                  <td><%= link_to post.user.name, song_post_path(post.song_id, post.id) %></td>
+                  <% if post.user.present? %>
+                    <td><%= link_to post.user.name, song_post_path(post.song_id, post.id) %></td>
+                  <% else %>
+                    <td>No User</td>
+                  <% end %>
                   <td><%= post.listen %></td>
                   <td><%= post.text %></td>
                 </tr>
