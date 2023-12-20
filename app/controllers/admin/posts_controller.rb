@@ -8,7 +8,7 @@ class Admin::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to admin_songs_path
+    redirect_to admin_song_path(post.song.id)
   end
 
   def search
