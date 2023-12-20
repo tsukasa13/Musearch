@@ -14,7 +14,7 @@
         <% @posts.each do |post| %>
           <tbody>
             <tr>
-              <td><%= link_to post.song.user.name, post_path(post.id) %></td>
+              <td><%= link_to post.user.name, post_path(post.id) %></td>
               <td><%= post.listen %></td>
               <td><%= post.text %></td>
             </tr>
