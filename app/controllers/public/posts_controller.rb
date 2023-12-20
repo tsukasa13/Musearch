@@ -32,7 +32,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to song_post_path(@post.id)
+    redirect_to song_path(post.song.id)
   end
 
   def search
