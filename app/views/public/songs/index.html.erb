@@ -3,14 +3,14 @@
     <div class="col-lg-4">
       <div>
         <div>
-          <p class="m-3">曲検索</p>
+          <p class="m-3">曲検索（曲名、アーティスト名、ジャンル名）</p>
           <%= form_with url: search_with_songs_songs_path, local: true, method: :get do |f| %>
             <%= f.text_field :keyword %>
             <%= f.submit "検索" %>
           <% end %>
         </div>
         <div>
-          <p class="m-3">レビュー検索</p>
+          <p class="m-3">レビュー検索（どんな時に聴きたいか、キーワード）</p>
           <%= form_with url: search_with_posts_songs_path, local: true, method: :get do |f| %>
             <%= f.text_field :keyword %>
             <%= f.submit "検索" %>
