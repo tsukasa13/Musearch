@@ -3,7 +3,6 @@ class Public::UsersController < ApplicationController
     @user = current_user
     @likes = Post.likes(current_user, params[:page], 12)
     @songs = current_user.songs.includes(:posts)
-    #@posts = Post.where(song_id: @songs.map(&:id))
     @posts = current_user.posts
   end
 
